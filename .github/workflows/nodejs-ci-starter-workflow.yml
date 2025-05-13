@@ -13,7 +13,7 @@ jobs:
     env:
       MONGO_URI: 'mongodb://superuser:${{ secrets.MONGO_PASSWORD }}@localhost:27017/superData'
       MONGO_USERNAME: 'superuser'
-      MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+      # MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
 
     services:
       mongo:
