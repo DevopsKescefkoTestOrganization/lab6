@@ -39,17 +39,14 @@ jobs:
     - name: Run Coverage
       run: npm run coverage --if-present
 
-    - name: Set up Google Cloud SDK
-      uses: google-github-actions/setup-gcloud@v0.2.0
-      with:
-        version: 'latest'
-
     - name: Authenticate to Google Cloud
-      env:
-        GCP_CREDENTIALS_JSON: ${{ secrets.GCP_CREDENTIALS_JSON }}
-      run: echo "$GCP_CREDENTIALS_JSON" > "$HOME/gcloud-key.json" && gcloud auth activate-service-account --key-file="$HOME/gcloud-key.json"
+      uses: google-github-actions/auth@v2
+      with:
+        workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+        service_account: 'my-service-account@my-project.iam.gserviceaccount.com'
 
     - name: Upload Coverage Report to GCS
-      run: |
-        # Assuming the coverage report is generated at 'coverage/coverage-final.json'
-        gsutil cp coverage/coverage-final.json gs://${{ secrets.GCS_BUCKET_NAME }}/reports/coverage-final.json
+      uses: google-github-actions/upload-cloud-storage@v2
+      with:
+        path: coverage/coverage-final.json
+        destination: '${{ secrets.GCS_BUCKET_NAME }}/reports/'
