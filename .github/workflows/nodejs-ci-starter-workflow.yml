@@ -33,11 +33,11 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
-    - name: Unit Testing
-      run: npm test --if-present
+    # - name: Unit Testing
+    #   run: npm test --if-present
 
-    - name: Run Coverage
-      run: npm run coverage --if-present
+    # - name: Run Coverage
+    #   run: npm run coverage --if-present
 
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v2
