@@ -58,4 +58,4 @@ jobs:
       uses: google-github-actions/upload-cloud-storage@v2
       with:
         path: coverage/coverage-final.json
-        destination: 'gs://${{ secrets.GCS_BUCKET_NAME }}/reports/coverage-final.json'
+        destination: 'gs://github-actions-reports/reports/coverage-final.json'
