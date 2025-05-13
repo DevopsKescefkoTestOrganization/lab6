@@ -56,7 +56,5 @@ jobs:
         service_account: 'my-service-account@stone-column-459311-v2.iam.gserviceaccount.com'
 
     - name: Upload Coverage Report to GCS
-      uses: google-github-actions/upload-cloud-storage@v2
-      with:
-        path: coverage/coverage-final.json
-        destination: 'gs://github-actions-reports/reports/coverage-final.json' # destination: 'gs://github-actions-reports/reports/coverage-final.json'
+      run: |
+        gsutil cp coverage/coverage-final.json gs://github-actions-reports/reports/coverage-final.json
