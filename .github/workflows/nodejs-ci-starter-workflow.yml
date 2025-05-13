@@ -10,6 +10,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      MONGO_URI: 'mongodb://superuser:${{ secrets.MONGO_PASSWORD }}@localhost:27017/superData'
+      MONGO_USERNAME: 'superuser'
+      MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+
     services:
       mongo:
         image: siddharth67/mongo-db:non-prod
@@ -20,11 +25,6 @@ jobs:
           --health-interval 10s 
           --health-timeout 5s 
           --health-retries 5
-
-    env:
-      MONGO_URI: 'mongodb://superuser:${{ secrets.MONGO_PASSWORD }}@localhost:27017/superData'
-      MONGO_USERNAME: 'superuser'
-      MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
 
     steps:
     - name: Checkout Repository
