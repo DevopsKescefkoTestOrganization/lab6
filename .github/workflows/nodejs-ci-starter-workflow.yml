@@ -13,18 +13,13 @@ jobs:
     env:
       MONGO_URI: 'mongodb://superuser:${{ secrets.MONGO_PASSWORD }}@localhost:27017/superData'
       MONGO_USERNAME: 'superuser'
-      # MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+      MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
 
     services:
       mongo:
         image: siddharth67/mongo-db:non-prod
         ports:
           - 27017:27017
-        options: >-
-          --health-cmd "mongosh --username superuser --password ${{ secrets.MONGO_PASSWORD }} --eval 'db.runCommand({ ping: 1 })'"
-          --health-interval 10s 
-          --health-timeout 5s 
-          --health-retries 5
 
     steps:
     - name: Checkout Repository
